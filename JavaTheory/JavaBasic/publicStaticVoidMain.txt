@@ -1,1 +1,68 @@
 Java Basic
+
+In Java, for creating a program it is necessary to create a class that contains the main() method (entry point of the program).
+class Simple{  
+    public static void main(String args[]){  
+     System.out.println("Hello Java");  
+    }  
+}  
+
+Compilation Flow:
+When we compile Java program using javac tool, the Java compiler converts the source code into byte code.
+
+Parameters used in First Java Program
+Let's see what is the meaning of class, public, static, void, main, String[], System.out.println().
+
+class keyword is used to declare a class in Java.
+
+public keyword is an access modifier that represents visibility. It means it is visible to all.
+
+static is a keyword. If we declare any method as static, it is known as the static method. The core advantage of the static method is that there is no need to create an object to invoke the static method. The main() method is executed by the JVM, so it does not require creating an object to invoke the main() method. So, it saves memory.
+
+void is the return type of the method. It means it does not return any value.
+
+The main() method represents the starting point of the program.
+
+String[] args or String args[] is used for command line argument. We will discuss it in coming section.
+
+System.out.println() is used to print statement on the console. Here, System is a class, out is an object of the PrintStream class, println() is a method of the PrintStream class. We will discuss the internal working of System.out.println() statement in the coming section.
+
+Valid Java main() method signature
+
+public static void main(String[] args)  
+public static void main(String []args)  
+public static void main(String args[])  
+public static void main(String... args)  
+static public void main(String[] args)  
+public static final void main(String[] args)  
+final public static void main(String[] args)  
+final strictfp public static void main(String[] args)  
+
+Invalid Java main() method signature
+
+public void main(String[] args)  
+static void main(String[] args)  
+public void static main(String[] args)  
+abstract public static void main(String[] args)  
+
+What happens at runtime?
+
+At runtime, the following steps are performed:
+
+class file -> classloader -> Bytecode verified -> interpreter -> runtime -> hardware
+
+- Classloader: It is the subsystem of JVM that is used to load class files.
+- Bytecode Verifier: Checks the code fragments for illegal code that can violate access rights to objects.
+- Interpreter: Read bytecode stream then execute the instructions.
+
+Q) Can you save a Java source file by another name than the class name?
+Yes, if the class is not public. It is explained in the figure given below:
+To compile:
+javac Hard.java
+To execute:
+java Simple
+Observe that, we have compiled the code with file name but running the program with class name. Therefore, we can save a Java program other than class name.
+
+Q) Can you have multiple classes in a java source file?
+Yes
+
