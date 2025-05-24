@@ -1,0 +1,100 @@
+
+
+JVM
+JVM (Java Virtual Machine) is an abstract machine. It is called a virtual machine because it doesn't physically exist. It is a specification 
+that provides a runtime environment in which Java bytecode can be executed. It can also run those programs that are written in other languages 
+and compiled to Java bytecode.
+
+The JVM performs the following main tasks:
+- Loads code
+- Verifies code
+- Executes code
+- Provides runtime environment
+
+JVM Provides Definitions for The:
+- Memory area
+- Class file format
+- Register set
+- Garbage-collected heap
+- Fatal error reporting etc.
+
+JVM Architecture
+
+              class loader  (Java Runtime system)
+                     |
+       class area - Heap - Stack - PC register - Native method interface (Memory Area allocated by the JVM)
+                     |
+                Excution engine
+                     |
+            Native method interface
+                     |
+              Java Native Libraries
+
+1) Classloader
+Classloader is a subsystem of JVM which is used to load class files. Whenever we run the Java program, it is loaded first by the classloader. There are three built-in classloaders in Java.
+
+- Bootstrap ClassLoader: It is the first classloader, which is the superclass of the Extension classloader. It loads the rt.jar file that 
+contains all class files of Java Standard Edition, such as the java.lang package classes, java.net package classes, java.util package 
+classes, java.io package classes, java.sql package classes, etc.
+- Extension ClassLoader: It is the child classloader of Bootstrap and the parent classloader of the System classloader. It loads the jar 
+files located inside the $JAVA_HOME/jre/lib/ext directory.
+- System/Application ClassLoader: It is the child classloader of the Extension It loads the classfiles from the classpath. By default, 
+the classpath is set to the current directory. You can change the classpath using the "-cp" or "-classpath" switch. It is also known as 
+the Application classloader.
+- Runtime Data Areas: JVM allocates memory for various runtime data areas during program execution. These include the method area, heap, 
+stack, PC (Program Counter) register, and native method stacks. The method area stores class structures, method code, static variables, 
+and constant pool. The heap is where objects are allocated, while the stack holds method invocation frames. The PC register keeps track 
+of the currently executing JVM instruction, and native method stacks are used for executing native methods.
+- Execution Engine: The execution engine is responsible for executing the compiled Java bytecode. It consists of two components: the 
+interpreter and the just-in-time (JIT) compiler. The interpreter reads and executes bytecode instructions one by one, while the JIT 
+compiler compiles frequently executed bytecode sequences into native machine code for improved performance.
+- Garbage Collector: JVM includes a garbage collector responsible for reclaiming memory occupied by objects that are no longer in use. 
+The garbage collector identifies and removes unreachable objects, freeing up memory for new allocations. Various garbage collection 
+algorithms are available, each with its own trade-offs in terms of performance and memory overhead.
+- Native Method Interface (JNI): JNI enables Java code to interact with native libraries and perform operations not directly supported 
+by the Java language. It allows Java applications to call functions written in languages like C and C++, providing flexibility and access 
+to platform-specific capabilities.
+
+2) Class (Method) Area
+Class(Method) Area stores per-class structures such as the runtime constant pool, field, and method data, and the code for methods.
+
+Runtime Constant Pool: The runtime constant pool is part of the Class(Method) Area and consists of constant pool entries. These are used to store symbolic references, literals, and other constant values required by the class. These include class and interface names, method and field names, string literals, and numeric literals.
+Field Data: The Class(Method) Area also stores information about the fields declared within a class, including their names, types, and access modifiers. This data is used by the JVM to access and manipulate object fields at runtime.
+Method Data: Along with field data, the Class(Method) Area contains information about the methods declared within a class, including their names, return types, parameter types, and bytecode instructions. This information is used by the JVM to invoke methods and execute bytecode instructions during program execution.
+3) Heap
+The Heap is the runtime data area in which objects are allocated.
+
+Object Allocation: The Heap is responsible for allocating memory for objects dynamically created during program execution. When an object is instantiated using the new keyword or by invoking a constructor, memory is allocated on the Heap to store the object's data.
+Garbage Collection: The Heap is managed by the JVM's garbage collector, which periodically scans the Heap for objects that are no longer in use or reachable by the application. Garbage collection involves reclaiming memory occupied by these unused objects, freeing up space for new allocations.
+Heap Structure: The Heap is typically divided into two main areas: The Young Generation and the Old Generation (also known as the Tenured Generation). The Young Generation is further divided into the Eden Space and Survivor Spaces, while the Old Generation contains long-lived objects that have survived multiple garbage collection cycles.
+
+4) Stack
+Java Stack stores frames. It holds local variables and partial results, and plays a part in method invocation and return.
+
+Each thread has a private JVM stack, created at the same time as thread.
+
+A new frame is created each time a method is invoked. A frame is destroyed when its method invocation completes.
+
+Frame Structure: Each frame contains local variables, operand stacks, and a reference to the runtime constant pool of the method being executed. Local variables store method parameters and local variables, while the operand stack is used for intermediate results and operand manipulation during method execution.
+Method Invocation: The Stack plays a crucial role in method invocation and return. When a method is invoked, a new frame is created and pushed onto the stack. Upon method completion, the frame is popped off the stack, and control returns to the invoking method.
+5) Program Counter Register
+PC (program counter) register contains the address of the Java virtual machine instruction currently being executed.
+
+The Program Counter (PC) register is a special register within the JVM that contains the memory address of the currently executing instruction.
+
+Instruction Pointer: The PC register serves as an instruction pointer, guiding the JVM through the sequence of bytecode instructions being executed.
+Thread-specific: Like the Java Stack, each thread in a Java application has its own PC register, allowing multiple threads to execute instructions concurrently without interference.
+6) Native Method Stack
+It contains all the native methods used in the application.
+
+The Native Method Stack is a memory area within the JVM used for executing native methods, which are methods written in languages other than Java, such as C or C++. Additional information about the Native Method Stack includes:
+
+Native Method Invocation: When a Java application invokes a native method, the execution flow transitions to the Native Method Stack, where the native method's code is executed.
+
+7) Execution Engine
+It contains:
+
+A virtual processor
+Interpreter: Read bytecode stream then execute the instructions.
+Just-In-Time(JIT) Compiler: It is used to improve the performance. JIT compiles parts of the byte code that have similar functionality at the same time, and hence reduces the amount of time needed for compilation. Here, the term "compiler" refers to a translator from the instruction set of a Java virtual machine (JVM) to the instruction set of a specific CPU.
+
